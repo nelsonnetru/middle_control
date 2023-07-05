@@ -1,0 +1,21 @@
+package commands;
+
+import view.View;
+
+public class ShowAllToys implements Command{
+    private View view;
+
+    public ShowAllToys (View view) {
+        this.view = view;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Показать все игрушки магазина";
+    }
+
+    @Override
+    public void execute() {
+        view.showAllToys();
+    }
+}
