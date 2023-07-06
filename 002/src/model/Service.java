@@ -1,42 +1,44 @@
 package model;
 
+import model.interfaces.ItemShop;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 
-public class Service {
-    private Shop<Toy> currentShop;
+public class Service <E extends ItemShop> {
+    private Shop<E> currentShop;
 
-    public Service (Shop<Toy> shop) {
+    public Service (Shop<E> shop) {
         this.currentShop = shop;
     }
 
     public Integer totalToysUnits () {
         Integer totalUnits = 0;
-        HashMap<Integer, Toy> mapToys = currentShop.getMapToys();
-        for (Map.Entry<Integer, Toy> entry: mapToys.entrySet()){
-            totalUnits += entry.getValue().getCountToys();
+        HashMap<Integer, E> mapToys = currentShop.getMapToys();
+        for (Map.Entry<Integer, E> entry: mapToys.entrySet()){
+            totalUnits += entry.getValue().getCountItems();
         }
         return totalUnits;
     }
 
     public String getNameToyByID (Integer id) {
-        return currentShop.getToyById(id).getToyName();
+        return currentShop.getItemById(id).getItemName();
     }
 
-    public void addToyToShop (Toy toy) {
-        currentShop.addToy(toy);
+    public void addToyToShop (E toy) {
+        currentShop.addItem(toy);
     }
 
     public int generatePrizeToy () {
-        int[] indexes = new int[currentShop.countTypeToys()];
-        int[] frequences = new int[currentShop.countTypeToys()];
+        int[] indexes = new int[currentShop.countTypeItems()];
+        int[] frequences = new int[currentShop.countTypeItems()];
 
         int x = 0;
-        HashMap<Integer, Toy> mapToys = currentShop.getMapToys();
-        for (Map.Entry<Integer, Toy> entry: mapToys.entrySet()){
-            if (entry.getValue().getCountToys() > 0) {
+        HashMap<Integer, E> mapToys = currentShop.getMapToys();
+        for (Map.Entry<Integer, E> entry: mapToys.entrySet()){
+            if (entry.getValue().getCountItems() > 0) {
                 indexes[x] = entry.getKey();
                 frequences[x] = entry.getValue().getFrequency();
                 x++;
@@ -74,7 +76,7 @@ public class Service {
     }
 
     public boolean presentationPrize (Integer idToy) {
-        if (currentShop.takeToy(idToy)) {
+        if (currentShop.takeItem(idToy)) {
             currentShop.addUnitToPrizeCollection(idToy);
             return true;
         }
@@ -91,23 +93,23 @@ public class Service {
     }
 
     public String getFullInfoAboutToys () {
-        return currentShop.getFullInfoAboutToys();
+        return currentShop.getFullInfoAboutItems();
     }
 
     public void updateToy(Integer id, String newName, Integer newCount, Integer newFrequency) {
-        currentShop.updateToyInfo(id, newName, newCount, newFrequency);
+        currentShop.updateItemInfo(id, newName, newCount, newFrequency);
     }
 
     public void deleteToy(Integer id) {
-        currentShop.deleteToy(id);
+        currentShop.deleteItem(id);
     }
 
     public HashMap<String, String> getToyMapById (Integer id) {
         HashMap<String, String> result = new HashMap<>();
         result.put("id", id.toString());
-        result.put("name", currentShop.getToyById(id).getToyName());
-        result.put("count", currentShop.getToyById(id).getCountToys().toString());
-        result.put("frequency", currentShop.getToyById(id).getFrequency().toString());
+        result.put("name", currentShop.getItemById(id).getItemName());
+        result.put("count", currentShop.getItemById(id).getCountItems().toString());
+        result.put("frequency", currentShop.getItemById(id).getFrequency().toString());
         return result;
     }
 }

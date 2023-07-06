@@ -1,10 +1,12 @@
 package model;
 
+import model.interfaces.ItemShop;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-public class Shop <E extends Toy> {
+public class Shop <E extends ItemShop> {
     private int lastId;
     private HashMap<Integer, E> mapToys;
     private LinkedList<Integer> prizeCollectionId;
@@ -19,7 +21,7 @@ public class Shop <E extends Toy> {
         this.lastId = 0;
     }
 
-    public void addToy (E toy) {
+    public void addItem(E toy) {
         this.lastId++;
         mapToys.put(this.lastId, toy);
     }
@@ -28,16 +30,16 @@ public class Shop <E extends Toy> {
         return lastId;
     }
 
-    public Integer countTypeToys() {
+    public Integer countTypeItems() {
         return mapToys.size();
     }
 
-    public Toy getToyById (Integer id) {
+    public E getItemById(Integer id) {
         return mapToys.get(id);
     }
 
-    public boolean takeToy(Integer idToy) {
-        return this.getToyById(idToy).useToy();
+    public boolean takeItem(Integer idToy) {
+        return this.getItemById(idToy).useItem();
     }
 
     public void addUnitToPrizeCollection (Integer id) {
@@ -48,27 +50,26 @@ public class Shop <E extends Toy> {
         return prizeCollectionId;
     }
 
-    public String getFullInfoAboutToys () {
+    public String getFullInfoAboutItems() {
         StringBuilder result = new StringBuilder();
         for (Map.Entry<Integer, E> entry: mapToys.entrySet()){
-            result.append(entry.getKey()).append(". ").append(entry.getValue().getToyName()).append("\n").
-                    append("\tКоличество: ").append(entry.getValue().getCountToys()).append("\n").
+            result.append(entry.getKey()).append(". ").append(entry.getValue().getItemName()).append("\n").
+                    append("\tКоличество: ").append(entry.getValue().getCountItems()).append("\n").
                     append("\tЧастота выпадения: ").append(entry.getValue().getFrequency()).append("\n\n");
         }
         return result.toString();
     }
 
-    public void updateToyInfo (Integer id, String newName, Integer newCount, Integer newFrequency) {
-        Toy toyItem = getToyById(id);
-        toyItem.setToyName(newName);
-        toyItem.setCountToys(newCount);
+    public void updateItemInfo(Integer id, String newName, Integer newCount, Integer newFrequency) {
+        E toyItem = getItemById(id);
+        toyItem.setItemName(newName);
+        toyItem.setCountItems(newCount);
         toyItem.setFrequency(newFrequency);
     }
 
-    public void deleteToy (Integer id) {
+    public void deleteItem(Integer id) {
         mapToys.remove(id);
     }
-
 
     @Override
     public String toString() {

@@ -1,6 +1,7 @@
 package view;
 
 import commands.*;
+import commands.interfaces.Command;
 
 import java.util.ArrayList;
 

@@ -1,8 +1,9 @@
 package commands;
 
-import view.View;
+import commands.interfaces.Command;
+import view.interfaces.View;
 
-public class Finish implements Command{
+public class Finish implements Command {
     private View view;
 
     public Finish (View view) {

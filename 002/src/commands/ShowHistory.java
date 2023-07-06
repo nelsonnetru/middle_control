@@ -1,8 +1,9 @@
 package commands;
 
-import view.View;
+import commands.interfaces.Command;
+import view.interfaces.View;
 
-public class ShowHistory implements Command{
+public class ShowHistory implements Command {
     private View view;
 
     public ShowHistory (View view) {

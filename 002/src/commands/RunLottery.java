@@ -1,8 +1,9 @@
 package commands;
 
-import view.View;
+import commands.interfaces.Command;
+import view.interfaces.View;
 
-public class RunLottery implements Command{
+public class RunLottery implements Command {
     private View view;
 
     public RunLottery (View view) {

@@ -1,8 +1,9 @@
 package commands;
 
-import view.View;
+import commands.interfaces.Command;
+import view.interfaces.View;
 
-public class DeleteToy implements Command{
+public class DeleteToy implements Command {
     private View view;
 
     public DeleteToy (View view) {

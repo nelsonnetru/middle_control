@@ -1,11 +1,12 @@
 package view;
 
 import presenter.Presenter;
+import view.interfaces.View;
 
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Console implements View{
+public class Console implements View {
     private Presenter presenter;
     private Scanner scan;
     private ConsoleMenu consoleMenu;
@@ -18,7 +19,6 @@ public class Console implements View{
         this.scan = new Scanner(System.in);
         this.work = true;
     }
-
 
     @Override
     public void start() {

@@ -1,8 +1,9 @@
 package commands;
 
-import view.View;
+import commands.interfaces.Command;
+import view.interfaces.View;
 
-public class AddToy implements Command{
+public class AddToy implements Command {
     private View view;
 
     public AddToy (View view) {

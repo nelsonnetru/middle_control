@@ -1,6 +1,8 @@
 package model;
 
-public class Toy {
+import model.interfaces.ItemShop;
+
+public class Toy implements ItemShop {
     private String toyName;
     private Integer countToys;
     private Integer frequency;
@@ -24,26 +26,26 @@ public class Toy {
         return frequency;
     }
 
-    public Integer getCountToys() {
+    public Integer getCountItems() {
         return countToys;
     }
 
-    public boolean useToy () {
+    public boolean useItem() {
         if (this.countToys == 0) return false;
 
         this.countToys--;
         return true;
     }
 
-    public String getToyName() {
+    public String getItemName() {
         return toyName;
     }
 
-    public void setToyName(String toyName) {
+    public void setItemName(String toyName) {
         this.toyName = toyName;
     }
 
-    public void setCountToys(Integer countToys) {
+    public void setCountItems(Integer countToys) {
         this.countToys = countToys;
     }
 

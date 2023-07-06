@@ -2,16 +2,17 @@ package presenter;
 
 import model.Service;
 import model.Toy;
-import view.View;
+import model.interfaces.ItemShop;
+import view.interfaces.View;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Presenter {
-    private Service service;
+    private Service<ItemShop> service;
     private View view;
 
-    public Presenter (View view, Service service) {
+    public Presenter (View view, Service<ItemShop> service) {
         this.service = service;
         this.view = view;
     }
